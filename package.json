@@ -1,0 +1,16 @@
+{
+  "name": "socket-battleship-example",
+  "version": "0.0.1",
+  "description": "battleship v1",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

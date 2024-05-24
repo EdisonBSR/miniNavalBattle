@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <style>
+      body {
+        display: flex;
+        flex-direction: row;
+      }
+      .container {
+        margin: 10px;
+        border: 1px solid black;
+      }
+      form {
+        display: flex;
+        justify-content: center;
+      }
+      .user {
+        background: transparent;
+        border: 0px;
+        text-align: center;
+      }
+      .table {
+        width: 500px;
+        height: 450px;
+      }
+
+      .boat-position {
+        width: 80px;
+        height: 80px;
+        /* width: fit-content; */
+        background: transparent;
+      }
+      .boat2-position {
+        width: 80px;
+        height: 80px;
+        /* width: fit-content; */
+        background: transparent;
+      }
+      .no-boat {
+        background: #9af3ff;
+        border-radius: 3px;
+        border: none;
+      }
+    </style>
+    <title>Mini Batalla Naval</title>
+  </head>
+  <body>
+    <div class="container">
+      <form id="form-1" action="">
+        <input
+          id="user-1"
+          class="user"
+          type="text"
+          placeholder="Ingrese su nombre"
+        />
+        <button type="submit" class="btn btn-success">Enviar</button>
+      </form>
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row">
+              <button
+                class="boat-position"
+                id="a1"
+                type="button"
+                value="00"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="a2"
+                type="button"
+                value="01"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="a3"
+                type="button"
+                value="02"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="a4"
+                type="button"
+                value="03"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="a5"
+                type="button"
+                value="04"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">
+              <button
+                class="boat-position"
+                id="b1"
+                type="button"
+                value="10"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="b2"
+                type="button"
+                value="11"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="b3"
+                type="button"
+                value="12"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="b4"
+                type="button"
+                value="13"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="b5"
+                type="button"
+                value="14"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">
+              <button
+                class="boat-position"
+                id="c1"
+                type="button"
+                value="20"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="c2"
+                type="button"
+                value="21"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="c3"
+                type="button"
+                value="22"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="c4"
+                type="button"
+                value="23"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="c5"
+                type="button"
+                value="24"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row" name="1">
+              <button
+                class="boat-position"
+                id="d1"
+                type="button"
+                value="30"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="d2"
+                type="button"
+                value="31"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="d3"
+                type="button"
+                value="32"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="d4"
+                type="button"
+                value="33"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="d5"
+                type="button"
+                value="34"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">
+              <button
+                class="boat-position"
+                id="e1"
+                type="button"
+                value="40"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="e2"
+                type="button"
+                value="41"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="e3"
+                type="button"
+                value="42"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="e4"
+                type="button"
+                value="43"
+                onclick="shipPlayer1()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat-position"
+                id="e5"
+                type="button"
+                onclick="shipPlayer1()"
+                value="44"
+              ></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="container">
+      <form id="form-2" action="">
+        <input
+          id="user-2"
+          class="user"
+          type="text"
+          placeholder="Ingrese su nombre"
+        />
+        <button type="submit" class="btn btn-success">Ingresar</button>
+      </form>
+      <table class="table table-borderless">
+        <thead>
+          Tu mapa
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row">
+              <button
+                class="boat2-position"
+                id="2a1"
+                type="button"
+                value="00"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2a2"
+                type="button"
+                value="01"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2a3"
+                type="button"
+                value="02"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2a4"
+                type="button"
+                value="03"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2a5"
+                type="button"
+                value="04"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">
+              <button
+                class="boat2-position"
+                id="2b1"
+                type="button"
+                value="10"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2b2"
+                type="button"
+                value="11"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2b3"
+                type="button"
+                value="12"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2b4"
+                type="button"
+                value="13"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2b5"
+                type="button"
+                value="14"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">
+              <button
+                class="boat2-position"
+                id="2c1"
+                type="button"
+                value="20"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2c2"
+                type="button"
+                value="21"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2c3"
+                type="button"
+                value="22"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2c4"
+                type="button"
+                value="23"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2c5"
+                type="button"
+                value="24"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row" name="1">
+              <button
+                class="boat2-position"
+                id="2d1"
+                type="button"
+                value="30"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2d2"
+                type="button"
+                value="31"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2d3"
+                type="button"
+                value="32"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2d4"
+                type="button"
+                value="33"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2d5"
+                type="button"
+                value="34"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">
+              <button
+                class="boat2-position"
+                id="2e1"
+                type="button"
+                value="40"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2e2"
+                type="button"
+                value="41"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2e3"
+                type="button"
+                value="42"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2e4"
+                type="button"
+                value="43"
+                onclick="shipPlayer2()"
+              ></button>
+            </td>
+            <td>
+              <button
+                class="boat2-position"
+                id="2e5"
+                type="button"
+                onclick="shipPlayer2()"
+                value="44"
+              ></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      let board = [];
+      let board2 = [];
+      let countPosition = 0;
+      let countPosition2 = 0;
+      const ID_BOAT = "bs";
+      const FORM1 = document.getElementById("form-1");
+      const USER1 = document.getElementById("user-1");
+      const FORM2 = document.getElementById("form-2");
+      const USER2 = document.getElementById("user-2");
+      let player1 = "";
+      let player2 = "";
+      let start1 = true;
+      let start2 = true;
+      for (let row = 0; row < 5; row++) {
+        board[row] = [];
+        board2[row] = [];
+        for (let column = 0; column < 5; column++) {
+          board[row][column] = 0;
+          board2[row][column] = 0;
+        }
+      }
+      FORM1.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (USER1.value != "") {
+          player1 = USER1.value;
+          USER1.disabled = true;
+        }
+        console.log(USER1.value);
+        player1 = USER1.value;
+      });
+      FORM2.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(USER2.value);
+        if (USER2.value != "") {
+          player2 = USER2.value;
+          USER2.disabled = true;
+        }
+      });
+      const WATER = document.createElement("span");
+      WATER.className += "bi bi-water ";
+      // const BOAT = document.createElement("span");
+      // BOAT.className += "bi bi-fire";
+      //   console.log(matriz);
+      shipPlayer1 = () => {
+        if (countPosition < 5) {
+          // alert(event.target.value);
+          const BOAT = document.createElement("span");
+          BOAT.className += "bi bi-fire";
+          let position = event.target.value;
+          let x = position.split("");
+          console.log(x);
+          let [row, column] = x;
+          console.log(`fila ${row} y columna ${column}`);
+          board[row][column] = ID_BOAT;
+          console.log(`fila ${row} - columna ${column}`);
+          console.log(board[row][column]);
+          const ID = event.target.getAttribute("id");
+          console.log(`id del boton para el barco: ${ID}`);
+          const BUTTON = document.getElementById(`${ID}`);
+          BUTTON.appendChild(BOAT);
+          countPosition++;
+        }
+        if (countPosition == 5 && start1) {
+          console.log("para enviar");
+
+          socket.emit("start battle", player1, board);
+          start1 = false;
+        }
+      };
+
+      shipPlayer2 = () => {
+        if (countPosition2 < 5) {
+          // alert(event.target.value);
+          const BOAT = document.createElement("span");
+          BOAT.className += "bi bi-fire";
+          let position = event.target.value;
+          let x = position.split("");
+          console.log(x);
+          let [row, column] = x;
+          console.log(`fila ${row} y columna ${column}`);
+          board2[row][column] = ID_BOAT;
+          console.log(`fila ${row} - columna ${column}`);
+          console.log(board2[row][column]);
+          const ID = event.target.getAttribute("id");
+          console.log(`id del boton para el barco: ${ID}`);
+          const BUTTON = document.getElementById(`${ID}`);
+          BUTTON.appendChild(BOAT);
+          countPosition2++;
+        }
+        if (countPosition2 == 5 && start2) {
+          console.log("para enviar");
+          socket.emit("start battle", player2, board2);
+          start2 = false;
+        }
+      };
+    </script>
+  </body>
+</html>
+<!-- selectElement.addEventListener("change", (event) => {
+  resultado.textContent = `Te gusta el sabor ${event.target.value}`; -->
