@@ -578,19 +578,22 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
+      let player1 = "";
+      let player2 = "";
+      let start1 = true;
+      let start2 = true;
       let board = [];
       let board2 = [];
       let countPosition = 0;
       let countPosition2 = 0;
+      let points = 0;
+      let points2 = 0;
       const ID_BOAT = "bs";
       const FORM1 = document.getElementById("form-1");
       const USER1 = document.getElementById("user-1");
       const FORM2 = document.getElementById("form-2");
       const USER2 = document.getElementById("user-2");
-      let player1 = "";
-      let player2 = "";
-      let start1 = true;
-      let start2 = true;
+
       for (let row = 0; row < 5; row++) {
         board[row] = [];
         board2[row] = [];
@@ -616,12 +619,10 @@
           USER2.disabled = true;
         }
       });
-      const WATER = document.createElement("span");
-      WATER.className += "bi bi-water ";
-      // const BOAT = document.createElement("span");
-      // BOAT.className += "bi bi-fire";
-      //   console.log(matriz);
+
       shipPlayer1 = () => {
+        const WATER = document.createElement("span");
+        WATER.className += "bi bi-water ";
         if (countPosition < 5) {
           // alert(event.target.value);
           const BOAT = document.createElement("span");
@@ -639,16 +640,21 @@
           const BUTTON = document.getElementById(`${ID}`);
           BUTTON.appendChild(BOAT);
           countPosition++;
-        }
-        if (countPosition == 5 && start1) {
+        } else if (countPosition == 5 && start1) {
           console.log("para enviar");
-
           socket.emit("start battle", player1, board);
           start1 = false;
+        } else if (points < 5) {
+          let position = event.target.value;
+          let x = position.split("");
+          let [row, column] = x;
+          socket.emit("attack", player1, row, column);
         }
       };
 
       shipPlayer2 = () => {
+        const WATER = document.createElement("span");
+        WATER.className += "bi bi-water ";
         if (countPosition2 < 5) {
           // alert(event.target.value);
           const BOAT = document.createElement("span");
@@ -666,15 +672,18 @@
           const BUTTON = document.getElementById(`${ID}`);
           BUTTON.appendChild(BOAT);
           countPosition2++;
-        }
-        if (countPosition2 == 5 && start2) {
+        } else if (countPosition2 == 5 && start2) {
           console.log("para enviar");
           socket.emit("start battle", player2, board2);
           start2 = false;
         }
       };
+      socket.on("response attack", (user, point, row, column) => {
+        if (user == player1 && point == 1) {
+        }
+      });
     </script>
   </body>
 </html>
-<!-- selectElement.addEventListener("change", (event) => {
-  resultado.textContent = `Te gusta el sabor ${event.target.value}`; -->
+<!-- Realizar funciones para poder reutilizar, en caso de acertar una funcion, en caso de no otra
+si se acierta tambien se debe pintar en el tablero enemigo. en caso contrario -->
