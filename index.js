@@ -11,8 +11,8 @@ const io = new Server(server);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 let player1 = "";
 let player2 = "";
-let board1 = [];
-let board2 = [];
+let boardPlayer1 = [];
+let boardPlayer2 = [];
 const ID_BOAT = "bs";
 app.get("/", (req, res) => {
   res.sendFile(join(__dirname, "index.html"));
@@ -29,43 +29,40 @@ io.on("connection", (socket) => {
       io.emit("load player", user);
     } else {
       console.log(`Jugador 1 ${player1} - Jugador 2 ${player2}`);
+      //AVISO YA EXISTEN LOS 2 JUGADORES...S
     }
   });
-  //VOLVER A ANALIZAR, EN BASE A LOS CAMBIOS REALIZADOS HTML Y NOMBRADO DE COMUNICACION SOCKET.
   socket.on("start battle", (user, boardPlayer) => {
-    if (player1 == "") {
-      player1 = user;
-      board1 = boardPlayer;
+    if (player1 == user) {
       console.log("tablero 1");
-      console.log(board1);
-    } else if (player2 == "") {
-      player2 = user;
+      boardPlayer1 = boardPlayer;
+      console.log(boardPlayer1);
+    } else if (player2 == user) {
       console.log("tablero 2");
-      board2 = boardPlayer;
-      console.log(board2);
+      boardPlayer2 = boardPlayer;
+      console.log(boardPlayer2);
     } else {
       console.log(
         "emitir mensaje que no puede jugar por el momento y emitir el juego"
       );
     }
   });
-  //ELIMINAR BUTTON POR QUE LA IDEA ES MANEJAR FILA Y COLUMNA CON UN 1 AL INICIO.
-  socket.on("game", (user, row, column, BUTTON) => {
+  socket.on("attack", (user, point, row, column) => {
     if (player1 == user) {
-      let ponit = 1;
-      if (board2[row][column] == ID_BOAT) {
-        io.emit("response attack", player1, ponit, row, column, BUTTON);
+      if (boardPlayer2[row][column] == ID_BOAT) {
+        point = 1;
+        io.emit("attack", player1, point, row, column);
       } else {
-        ponit = 0;
-        io.emit("response attack", player1, ponit, row, column);
+        point = 0;
+        io.emit("attack", player1, point, row, column);
       }
     } else if (player2 == user) {
-      let ponit = 1;
-      if (board1[row][column] == ID_BOAT) {
-        io.emit("response attack", player2, ponit, row, column);
+      if (boardPlayer1[row][column] == ID_BOAT) {
+        point = 1;
+        io.emit("attack", player2, point, row, column);
       } else {
-        ponit = 0;
-        io.emit("response attack", player2, ponit, row, column);
+        point = 0;
+        io.emit("attack", player2, point, row, column);
       }
     }
   });

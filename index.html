@@ -576,21 +576,25 @@
       const socket = io();
       let player1 = "";
       let player2 = "";
-      let startGame = true;
+      let startGame = false;
       let boardPosition = [];
       let boardAttack = [];
       let countPosition = 0;
       let points = 0;
-
+      let enableAttack = false;
       const ID_BOAT = "bs";
       const FORM1 = document.getElementById("form-1");
       const USER1 = document.getElementById("user-1");
-      good = (row, column, BUTTON) => {
+      good = (row, column) => {
+        ID = `${row}${column}`;
+        BUTTON = document.getElementById(`${ID}`);
         const BOAT = document.createElement("span");
         BOAT.className += "bi bi-fire";
         BUTTON.appendChild(BOAT);
       };
-      fail = (row, column, BUTTON) => {
+      fail = (row, column) => {
+        const ID = `${row}${column}`;
+        BUTTON = document.getElementById(`${ID}`);
         const BOAT = document.createElement("span");
         BOAT.className += "bi bi-water";
         BUTTON.appendChild(BOAT);
@@ -641,7 +645,9 @@
           BUTTON.style.background = "#64FB8D";
           BUTTON.appendChild(BOAT);
           countPosition++;
-        } else if (countPosition == 5) {
+          alert(countPosition);
+        }
+        if (countPosition == 5) {
           const BUTTO_POSITION =
             document.getElementsByClassName("boat-position");
           // BUTTO_POSITION.removeEventListener("click", boatPosition);
@@ -651,8 +657,7 @@
       };
       //Boton para dar inicio y poner la siguiete validacion para que solo se inicie una vez.
       start = () => {
-        // socket.emit("load player", player1);
-        console.log("Probando inicio");
+        // console.log("Probando inicio");
         console.log(player1 != "");
         console.log(player2 != "");
         console.log(player2);
@@ -664,31 +669,29 @@
           BUTTO_START_GAME.disabled = true;
           BUTTO_START_GAME.innerText = "Juego iniciado";
           BUTTO_START_GAME.style.color = "green";
+          enableAttack = true;
+        } else if (countPosition < 5) {
+          alert("Aun no se tiene la posicion de los barcos en el tablero");
         } else {
           alert("Esperando segundo jugador");
         }
       };
 
       attack = () => {
-        //EL ICONO QUE LES CORRESPONDE DEPENDERA DE LA RESPUESTA DEL SOCKET
-        //SEGUN LA POSICION DADA. AL ESCUCHAR LA RESPUESTA REALIZAR LA ACCION CORRESPONDIENTE
-        //EL ID SE ESTABLECIO BAJO LA IDEA DE UN 1 Y LE SIGUE LA FILA,COLUMNA
-        // const WATER = document.createElement("span");
-        // WATER.className += "bi bi-water ";
-        // const BOAT = document.createElement("span");
-        // BOAT.className += "bi bi-fire";
-        let position = event.target.value;
-        let x = position.split("");
-        console.log(x);
-        let [row, column] = x;
-        console.log(`fila ${row} y columna ${column}`);
-        const ID = event.target.getAttribute("id");
-        const BUTTON = document.getElementById(`${ID}`);
-        BUTTON.disabled = true;
-        //EMITIR ACA COLUMNA FILA,PLAYER1, EN SU RESPUESTA VALIDA SI GANO PUNTO O NO. SI COMPLETO LOS 5 PUNTOS PARA GANAR
-        // console.log(`id del boton para el barco: ${ID}`);
-        // const BUTTON = document.getElementById(`${ID}`);
-        // BUTTON.appendChild(BOAT);
+        if (enableAttack) {
+          let point = 0;
+          let position = event.target.value;
+          let x = position.split("");
+          let [row, column] = x;
+          console.log(`funcion attack => fila ${row} y columna ${column}`);
+          const ID = event.target.getAttribute("id");
+          const BUTTON = document.getElementById(`${ID}`);
+          BUTTON.disabled = true;
+          //EMITIR ACA COLUMNA FILA,PLAYER1, EN SU RESPUESTA VALIDA SI GANO PUNTO O NO. SI COMPLETO LOS 5 PUNTOS PARA GANAR
+          socket.emit("attack", player1, point, row, column);
+        } else {
+          console.log("no esta aun permitido atacar al rival");
+        }
       };
       socket.on("load player", (user) => {
         console.log(player1 != user);
@@ -699,14 +702,17 @@
           const SPAN_PLAYER2 = document.getElementById("spanPlayer2");
           SPAN_PLAYER2.innerHTML = user;
           console.log("usuario cargado");
-        } else {
-          console.log("Esperando segundo jugador");
         }
+        // else {
+        //   console.log("Esperando segundo jugador");
+        // }
       });
-      socket.on("attack", (user, point, row, column, BUTTON) => {
-        if (user == player1 && point == 1) {
+      socket.on("attack", (user, point, row, column) => {
+        if (point == 1) {
           points += point;
-          good(row, column, BUTTON);
+          good(row, column);
+        } else {
+          fail(row, column);
         }
       });
     </script>
