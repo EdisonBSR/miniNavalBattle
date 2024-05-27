@@ -585,19 +585,40 @@
       const ID_BOAT = "bs";
       const FORM1 = document.getElementById("form-1");
       const USER1 = document.getElementById("user-1");
-      good = (row, column) => {
-        ID = `${row}${column}`;
-        BUTTON = document.getElementById(`${ID}`);
-        const BOAT = document.createElement("span");
-        BOAT.className += "bi bi-fire";
-        BUTTON.appendChild(BOAT);
+      good = (row, column, user) => {
+        if (user == player1) {
+          ID = `2${row}${column}`;
+          BUTTON = document.getElementById(`${ID}`);
+          const BOAT = document.createElement("span");
+          BOAT.className += "bi bi-fire";
+          BUTTON.appendChild(BOAT);
+        } else if (user == player2) {
+          ID = `${row}${column}`;
+          BUTTON = document.getElementById(`${ID}`);
+          const BOAT = document.createElement("span");
+          BOAT.className += "bi bi-fire";
+          BUTTON.appendChild(BOAT);
+        }
+        // ID = `${row}${column}`;
+        // BUTTON = document.getElementById(`${ID}`);
+        // const BOAT = document.createElement("span");
+        // BOAT.className += "bi bi-fire";
+        // BUTTON.appendChild(BOAT);
       };
-      fail = (row, column) => {
-        const ID = `${row}${column}`;
-        BUTTON = document.getElementById(`${ID}`);
-        const BOAT = document.createElement("span");
-        BOAT.className += "bi bi-water";
-        BUTTON.appendChild(BOAT);
+      fail = (row, column, user) => {
+        if (user == player1) {
+          const ID = `2${row}${column}`;
+          BUTTON = document.getElementById(`${ID}`);
+          const BOAT = document.createElement("span");
+          BOAT.className += "bi bi-water";
+          BUTTON.appendChild(BOAT);
+        } else if (user == player2) {
+          const ID = `${row}${column}`;
+          BUTTON = document.getElementById(`${ID}`);
+          const BOAT = document.createElement("span");
+          BOAT.className += "bi bi-water";
+          BUTTON.appendChild(BOAT);
+        }
       };
 
       for (let row = 0; row < 5; row++) {
@@ -624,10 +645,7 @@
 
       //Se debe implementar solo para que permita ubicar mis barcos.
       boatPosition = () => {
-        // const WATER = document.createElement("span");
-        // WATER.className += "bi bi-water ";
         if (countPosition < 5) {
-          // alert(event.target.value);
           const BOAT = document.createElement("span");
           BOAT.className += "bi bi-rocket-takeoff";
           let position = event.target.value;
@@ -645,7 +663,6 @@
           BUTTON.style.background = "#64FB8D";
           BUTTON.appendChild(BOAT);
           countPosition++;
-          alert(countPosition);
         }
         if (countPosition == 5) {
           const BUTTO_POSITION =
@@ -688,6 +705,7 @@
           const BUTTON = document.getElementById(`${ID}`);
           BUTTON.disabled = true;
           //EMITIR ACA COLUMNA FILA,PLAYER1, EN SU RESPUESTA VALIDA SI GANO PUNTO O NO. SI COMPLETO LOS 5 PUNTOS PARA GANAR
+          console.log(`juegador 1 ${player1} - jugador 2 ${player2}`);
           socket.emit("attack", player1, point, row, column);
         } else {
           console.log("no esta aun permitido atacar al rival");
@@ -710,9 +728,9 @@
       socket.on("attack", (user, point, row, column) => {
         if (point == 1) {
           points += point;
-          good(row, column);
+          good(row, column, user);
         } else {
-          fail(row, column);
+          fail(row, column, user);
         }
       });
     </script>
