@@ -18,9 +18,12 @@
         display: flex;
         flex-direction: row;
       }
-      .container {
+      #container {
         margin: 10px;
-        border: 1px solid black;
+        /* border: 1px solid black; */
+      }
+      #container-Table2 > table {
+        margin-top: 90px;
       }
       form {
         display: flex;
@@ -35,29 +38,60 @@
         width: 500px;
         height: 450px;
       }
-
-      .boat-position {
-        width: 80px;
-        height: 80px;
-        /* width: fit-content; */
-        background: transparent;
+      .table-bordered td,
+      .table-bordered th {
+        border: 1px solid #0d86ff;
       }
-      .boat2-position {
+      .table-bordered td {
         width: 80px;
         height: 80px;
-        /* width: fit-content; */
+      }
+      .boat-position {
+        margin: 3px;
+        width: 80px;
+        height: 80px;
         background: transparent;
+        border: 0px;
+      }
+      .table td,
+      .table th {
+        padding: 0;
+      }
+      .table thead th {
+        text-align: center;
+        background: transparent;
+        border-top: 1px solid transparent;
+        border-left: 1px solid transparent;
+        border-right: 1px solid transparent;
+        border-bottom: 0 solid transparent;
+      }
+
+      .table th {
+        border-top: 1px solid transparent;
+        border-left: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+        text-align: center;
+        margin: 0 auto;
       }
       .no-boat {
         background: #9af3ff;
         border-radius: 3px;
         border: none;
       }
+      #sendStartGame {
+        margin: auto;
+        width: 80px;
+        padding: 5px;
+        margin-left: 20px;
+        margin-right: 20px;
+        color: #4e4e56;
+        text-align: center;
+      }
     </style>
     <title>Mini Batalla Naval</title>
   </head>
   <body>
-    <div class="container">
+    <div id="container">
       <form id="form-1" action="">
         <input
           id="user-1"
@@ -70,20 +104,25 @@
           Enviar
         </button>
       </form>
-      <table class="table table-borderless">
+      Barcos enemigos localizado
+      <p id="pointsPlayer1"></p>
+      <p id="pointsPlayer2"></p>
+      de 5
+      <table class="table table-bordered border-primary">
         <thead>
           <tr>
-            <th scope="col">
-              Barcos enemigos localizado
-              <p id="pointsPlayer1"></p>
-              <p id="pointsPlayer2"></p>
-              de 5
-            </th>
+            <th></th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td scope="row">
+            <th scope="row">A</th>
+            <td>
               <button
                 class="boat-position"
                 id="00"
@@ -130,6 +169,7 @@
             </td>
           </tr>
           <tr>
+            <th scope="row">B</th>
             <td scope="row">
               <button
                 class="boat-position"
@@ -177,6 +217,7 @@
             </td>
           </tr>
           <tr>
+            <th scope="row">C</th>
             <td scope="row">
               <button
                 class="boat-position"
@@ -224,6 +265,7 @@
             </td>
           </tr>
           <tr>
+            <th scope="row">D</th>
             <td scope="row" name="1">
               <button
                 class="boat-position"
@@ -271,6 +313,7 @@
             </td>
           </tr>
           <tr>
+            <th scope="row">E</th>
             <td scope="row">
               <button
                 class="boat-position"
@@ -320,17 +363,26 @@
         </tbody>
       </table>
     </div>
-    <p id="sendStartGame">Esperando otro jugador...</p>
-    <div class="container">
-      <table class="table table-borderless">
+    <p id="sendStartGame">Esperando jugador ...</p>
+    <div id="container-Table2">
+      <span id="spanPlayer2"></span>
+      <table class="table table-bordered border-primary">
         <thead>
-          <span id="spanPlayer2"></span>
+          <tr>
+            <th></th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+          </tr>
         </thead>
         <tbody>
           <tr>
-            <td scope="row">
+            <th scope="row">A</th>
+            <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="200"
                 type="button"
                 value="00"
@@ -339,7 +391,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="201"
                 type="button"
                 value="01"
@@ -348,7 +400,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="202"
                 type="button"
                 value="02"
@@ -357,7 +409,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="203"
                 type="button"
                 value="03"
@@ -366,7 +418,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="204"
                 type="button"
                 value="04"
@@ -375,9 +427,10 @@
             </td>
           </tr>
           <tr>
-            <td scope="row">
+            <th scope="row">B</th>
+            <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="210"
                 type="button"
                 value="10"
@@ -386,7 +439,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="211"
                 type="button"
                 value="11"
@@ -395,7 +448,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="212"
                 type="button"
                 value="12"
@@ -404,7 +457,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="213"
                 type="button"
                 value="13"
@@ -413,7 +466,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="214"
                 type="button"
                 value="14"
@@ -422,9 +475,10 @@
             </td>
           </tr>
           <tr>
-            <td scope="row">
+            <th scope="row">C</th>
+            <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="220"
                 type="button"
                 value="20"
@@ -433,7 +487,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="221"
                 type="button"
                 value="21"
@@ -442,7 +496,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="222"
                 type="button"
                 value="22"
@@ -451,7 +505,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="223"
                 type="button"
                 value="23"
@@ -460,7 +514,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="224"
                 type="button"
                 value="24"
@@ -469,9 +523,10 @@
             </td>
           </tr>
           <tr>
-            <td scope="row" name="1">
+            <th scope="row">D</th>
+            <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="230"
                 type="button"
                 value="30"
@@ -480,7 +535,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="231"
                 type="button"
                 value="31"
@@ -489,7 +544,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="232"
                 type="button"
                 value="32"
@@ -498,7 +553,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="233"
                 type="button"
                 value="33"
@@ -507,7 +562,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="234"
                 type="button"
                 value="34"
@@ -516,9 +571,10 @@
             </td>
           </tr>
           <tr>
-            <td scope="row">
+            <th scope="row">E</th>
+            <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="240"
                 type="button"
                 value="40"
@@ -527,7 +583,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="241"
                 type="button"
                 value="41"
@@ -536,7 +592,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="242"
                 type="button"
                 value="42"
@@ -545,7 +601,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="243"
                 type="button"
                 value="43"
@@ -554,7 +610,7 @@
             </td>
             <td>
               <button
-                class="boat2-position"
+                class="boat-position"
                 id="244"
                 type="button"
                 onclick="attack()"
@@ -583,7 +639,6 @@
       let playerAtq = "";
       let boardPosition = [];
       let countPosition = 0;
-      let enableAttack = true;
       let pointsPlayer1 = 0;
       let pointsPlayer2 = 0;
       const ID_BOAT = "bs";
@@ -593,14 +648,14 @@
       const POINTS_PLAYER2 = document.getElementById("pointsPlayer2");
       good = (row, column, user) => {
         if (user == player1) {
-          ID = `2${row}${column}`;
+          const ID = `2${row}${column}`;
           BUTTON = document.getElementById(`${ID}`);
           BUTTON.style.background = "#FE2626";
           const BOAT = document.createElement("span");
           BOAT.className += "bi bi-fire";
           BUTTON.appendChild(BOAT);
         } else if (user == player2) {
-          ID = `${row}${column}`;
+          const ID = `${row}${column}`;
           BUTTON = document.getElementById(`${ID}`);
           BUTTON.style.background = "#FE2626";
           const BOAT = document.createElement("span");
