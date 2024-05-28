@@ -13,6 +13,7 @@ let player1 = "";
 let player2 = "";
 let boardPlayer1 = [];
 let boardPlayer2 = [];
+let playerAttack = "";
 const ID_BOAT = "bs";
 app.get("/", (req, res) => {
   res.sendFile(join(__dirname, "index.html"));
@@ -23,10 +24,11 @@ io.on("connection", (socket) => {
     console, log(user);
     if (player1 == "") {
       player1 = user;
+      playerAttack = player1;
       io.emit("load player", player1);
     } else if (player2 == "") {
       player2 = user;
-      io.emit("load player", user);
+      io.emit("load player", player2);
     } else {
       console.log(`Jugador 1 ${player1} - Jugador 2 ${player2}`);
       //AVISO YA EXISTEN LOS 2 JUGADORES...S
@@ -41,28 +43,34 @@ io.on("connection", (socket) => {
       console.log("tablero 2");
       boardPlayer2 = boardPlayer;
       console.log(boardPlayer2);
-    } else {
-      console.log(
-        "emitir mensaje que no puede jugar por el momento y emitir el juego"
-      );
     }
   });
   socket.on("attack", (user, point, row, column) => {
-    if (player1 == user) {
-      if (boardPlayer2[row][column] == ID_BOAT) {
-        point = 1;
-        io.emit("attack", player1, point, row, column);
-      } else {
-        point = 0;
-        io.emit("attack", player1, point, row, column);
-      }
-    } else if (player2 == user) {
-      if (boardPlayer1[row][column] == ID_BOAT) {
-        point = 1;
-        io.emit("attack", player2, point, row, column);
-      } else {
-        point = 0;
-        io.emit("attack", player2, point, row, column);
+    if (user == playerAttack) {
+      if (player1 == user) {
+        if (boardPlayer2[row][column] == ID_BOAT) {
+          point = 1;
+          io.emit("attack", player1, point, row, column);
+          playerAttack = player2;
+          // io.emit("attack", player1, point, row, column);
+        } else {
+          point = 0;
+          io.emit("attack", player1, point, row, column);
+          playerAttack = player2;
+          // io.emit("attack", player1, point, row, column);
+        }
+      } else if (player2 == user) {
+        if (boardPlayer1[row][column] == ID_BOAT) {
+          point = 1;
+          io.emit("attack", player2, point, row, column);
+          playerAttack = player1;
+          // io.emit("attack", player2, point, row, column);
+        } else {
+          point = 0;
+          io.emit("attack", player2, point, row, column);
+          playerAttack = player1;
+          // io.emit("attack", player2, point, row, column);
+        }
       }
     }
   });
