@@ -22,6 +22,11 @@
         margin: 10px;
         /* border: 1px solid black; */
       }
+      #spanPlayer2 {
+        text-align: center;
+        font-style: oblique;
+        color: rgba(222, 48, 48, 0.9);
+      }
       #container-Table2 > table {
         margin-top: 90px;
       }
@@ -104,10 +109,7 @@
           Enviar
         </button>
       </form>
-      Barcos enemigos localizado
-      <p id="pointsPlayer1"></p>
-      <p id="pointsPlayer2"></p>
-      de 5
+      <p>Barcos enemigos localizado <span id="pointsPlayer1"></span></p>
       <table class="table table-bordered border-primary">
         <thead>
           <tr>
@@ -644,8 +646,8 @@
       const ID_BOAT = "bs";
       const FORM1 = document.getElementById("form-1");
       const USER1 = document.getElementById("user-1");
-      const POINTS_PLAYER1 = document.getElementById("pointsPlayer1");
-      const POINTS_PLAYER2 = document.getElementById("pointsPlayer2");
+      // const POINTS_PLAYER1 = document.getElementById("pointsPlayer1");
+      // const POINTS_PLAYER2 = document.getElementById("pointsPlayer2");
       good = (row, column, user) => {
         if (user == player1) {
           const ID = `2${row}${column}`;
@@ -759,12 +761,12 @@
       });
 
       socket.on("attack", (user, point, row, column) => {
-        console.log(user == player1);
+        console.log(playerAtq);
         if (user == player1) {
           if (point == 1) {
             pointsPlayer1 += point;
-            POINTS_PLAYER1.innerText = `${pointsPlayer1}`;
-            POINTS_PLAYER2.style.color = "transparent";
+            // POINTS_PLAYER1.innerText = `${pointsPlayer1}`;
+            // POINTS_PLAYER2.style.color = "transparent";
             good(row, column, user);
           } else {
             fail(row, column, user);
@@ -773,18 +775,15 @@
         } else if (user == player2) {
           if (point == 1) {
             pointsPlayer2 += point;
-            POINTS_PLAYER2.innerText = `${pointsPlayer2}`;
-            POINTS_PLAYER1.style.color = "transparent";
             good(row, column, user);
           } else {
             fail(row, column, user);
           }
           playerAtq = player1;
         }
-        const BUTTO_START_GAME = document.getElementById("sendStartGame");
-        BUTTO_START_GAME.disabled = true;
-        BUTTO_START_GAME.innerText = `Turno de ${playerAtq}`;
-        BUTTO_START_GAME.style.color = "green";
+        const PLAYER_START_GAME = document.getElementById("sendStartGame");
+        PLAYER_START_GAME.innerText = `Turno de ${playerAtq}`;
+        PLAYER_START_GAME.style.color = "green";
       });
     </script>
   </body>
