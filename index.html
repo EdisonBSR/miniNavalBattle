@@ -368,7 +368,7 @@
     <p id="sendStartGame">Esperando jugador ...</p>
     <div id="container-Table2">
       <span id="spanPlayer2"></span>
-      <p>Barcos enemigoss2 localizado <span id="scorePlayer2"></span></p>
+      <p><span id="scorePlayer2"></span></p>
       <table class="table table-bordered border-primary">
         <thead>
           <tr>
@@ -643,14 +643,12 @@
       let boardPosition = [];
       let countPosition = 0;
       let pointsPlayer1 = 0;
-      let pointsPlayer2 = 0;
       const ID_BOAT = "bs";
       const FORM1 = document.getElementById("form-1");
       const USER1 = document.getElementById("user-1");
-      // const POINTS_PLAYER1 = document.getElementById("scorePlayer1");
-      // const POINTS_PLAYER2 = document.getElementById("pointsPlayer2");
       good = (row, column, user) => {
         if (user == player1) {
+          console.log("pinta fuego");
           const ID = `2${row}${column}`;
           BUTTON = document.getElementById(`${ID}`);
           BUTTON.style.background = "#FE2626";
@@ -668,6 +666,7 @@
       };
       fail = (row, column, user) => {
         if (user == player1) {
+          console.log("pinta agua");
           const ID = `2${row}${column}`;
           BUTTON = document.getElementById(`${ID}`);
           BUTTON.style.background = "#03CAE3";
@@ -675,6 +674,7 @@
           BOAT.className += "bi bi-water";
           BUTTON.appendChild(BOAT);
         } else if (user == player2) {
+          console.log("pinta agua");
           const ID = `${row}${column}`;
           BUTTON = document.getElementById(`${ID}`);
           BUTTON.style.background = "#03CAE3";
@@ -754,6 +754,14 @@
       socket.on("new player", (user1, user2) => {
         if (user1 != "" && user2 != "") {
           alert("usuarios completos");
+          USER1.disabled = true;
+          const SEND_NAME = document.getElementById("inputName");
+          SEND_NAME.disabled = true;
+          SEND_NAME.style.background = "transparent";
+          SEND_NAME.style.border = 0;
+          USER1.style.background = "transparent";
+          USER1.style.color = "transparent";
+          USE1.removeAttribute("placeholder");
         } else if (user1 != "") {
           player2 = user1;
           const SPAN_PLAYER2 = document.getElementById("spanPlayer2");
@@ -774,9 +782,8 @@
       });
 
       socket.on("attack", (user, point, row, column) => {
-        console.log(playerAtq);
-        console.log(`USUARIO 1 - ${player1} --- USUARIO 2 ${player2}`);
         if (user == player1) {
+          console.log(`Ingreso ${player1}`);
           if (point == 1) {
             const POINTS_PLAYER1 = document.getElementById("scorePlayer1");
             pointsPlayer1 += point;
@@ -787,6 +794,8 @@
           }
           playerAtq = player2;
         } else if (user == player2) {
+          console.log(`Ingreso ${player2}`);
+
           if (point == 1) {
             good(row, column, user);
           } else {
