@@ -748,10 +748,19 @@
           socket.emit("attack", player1, point, row, column);
         } else {
           alert("No es tu turno para atacar");
+          BUTTON.disabled = true;
         }
       };
+      socket.on("new player", (user1, user2) => {
+        if (user1 != "" && user2 != "") {
+          alert("usuarios completos");
+        } else if (user1 != "") {
+          player2 = user1;
+          const SPAN_PLAYER2 = document.getElementById("spanPlayer2");
+          SPAN_PLAYER2.innerHTML = player2;
+        }
+      });
       socket.on("load player", (user) => {
-        console.log(player1 != user);
         if (player2 == "" && player1 != user) {
           player2 = user;
           const SPAN_PLAYER2 = document.getElementById("spanPlayer2");

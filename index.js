@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
+  socket.emit("new player", player1, player2);
   socket.on("load player", (user) => {
     console, log(user);
     if (player1 == "") {
@@ -29,9 +30,6 @@ io.on("connection", (socket) => {
     } else if (player2 == "") {
       player2 = user;
       io.emit("load player", player2);
-    } else {
-      console.log(`Jugador 1 ${player1} - Jugador 2 ${player2}`);
-      //AVISO YA EXISTEN LOS 2 JUGADORES...S
     }
   });
   socket.on("start battle", (user, boardPlayer) => {
