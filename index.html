@@ -75,7 +75,8 @@
           <tr>
             <th scope="col">
               Barcos enemigos localizado
-              <p id="points"></p>
+              <p id="pointsPlayer1"></p>
+              <p id="pointsPlayer2"></p>
               de 5
             </th>
           </tr>
@@ -582,13 +583,14 @@
       let playerAtq = "";
       let boardPosition = [];
       let countPosition = 0;
-      let points = 0;
       let enableAttack = true;
-
+      let pointsPlayer1 = 0;
+      let pointsPlayer2 = 0;
       const ID_BOAT = "bs";
       const FORM1 = document.getElementById("form-1");
       const USER1 = document.getElementById("user-1");
-      const POINTS = document.getElementById("points");
+      const POINTS_PLAYER1 = document.getElementById("pointsPlayer1");
+      const POINTS_PLAYER2 = document.getElementById("pointsPlayer2");
       good = (row, column, user) => {
         if (user == player1) {
           ID = `2${row}${column}`;
@@ -705,8 +707,9 @@
         console.log(user == player1);
         if (user == player1) {
           if (point == 1) {
-            points += point;
-            POINTS.innerText = `${points}`;
+            pointsPlayer1 += point;
+            POINTS_PLAYER1.innerText = `${pointsPlayer1}`;
+            POINTS_PLAYER2.style.color = "transparent";
             good(row, column, user);
           } else {
             fail(row, column, user);
@@ -714,8 +717,9 @@
           playerAtq = player2;
         } else if (user == player2) {
           if (point == 1) {
-            points += point;
-            POINTS.innerText = `${points}`;
+            pointsPlayer2 += point;
+            POINTS_PLAYER2.innerText = `${pointsPlayer2}`;
+            POINTS_PLAYER1.style.color = "transparent";
             good(row, column, user);
           } else {
             fail(row, column, user);

@@ -50,26 +50,22 @@ io.on("connection", (socket) => {
       if (player1 == user) {
         if (boardPlayer2[row][column] == ID_BOAT) {
           point = 1;
-          io.emit("attack", player1, point, row, column);
           playerAttack = player2;
-          // io.emit("attack", player1, point, row, column);
+          io.emit("attack", player1, point, row, column);
         } else {
           point = 0;
-          io.emit("attack", player1, point, row, column);
           playerAttack = player2;
-          // io.emit("attack", player1, point, row, column);
+          io.emit("attack", player1, point, row, column);
         }
       } else if (player2 == user) {
         if (boardPlayer1[row][column] == ID_BOAT) {
           point = 1;
-          io.emit("attack", player2, point, row, column);
           playerAttack = player1;
-          // io.emit("attack", player2, point, row, column);
+          io.emit("attack", player2, point, row, column);
         } else {
           point = 0;
-          io.emit("attack", player2, point, row, column);
           playerAttack = player1;
-          // io.emit("attack", player2, point, row, column);
+          io.emit("attack", player2, point, row, column);
         }
       }
     }
