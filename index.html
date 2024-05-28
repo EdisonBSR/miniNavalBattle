@@ -109,7 +109,7 @@
           Enviar
         </button>
       </form>
-      <p>Barcos enemigos localizado <span id="pointsPlayer1"></span></p>
+      <p>Barcos enemigos localizado <span id="scorePlayer1"></span></p>
       <table class="table table-bordered border-primary">
         <thead>
           <tr>
@@ -368,6 +368,7 @@
     <p id="sendStartGame">Esperando jugador ...</p>
     <div id="container-Table2">
       <span id="spanPlayer2"></span>
+      <p>Barcos enemigoss2 localizado <span id="scorePlayer2"></span></p>
       <table class="table table-bordered border-primary">
         <thead>
           <tr>
@@ -646,7 +647,7 @@
       const ID_BOAT = "bs";
       const FORM1 = document.getElementById("form-1");
       const USER1 = document.getElementById("user-1");
-      // const POINTS_PLAYER1 = document.getElementById("pointsPlayer1");
+      // const POINTS_PLAYER1 = document.getElementById("scorePlayer1");
       // const POINTS_PLAYER2 = document.getElementById("pointsPlayer2");
       good = (row, column, user) => {
         if (user == player1) {
@@ -757,16 +758,20 @@
           SPAN_PLAYER2.innerHTML = user;
           console.log("usuario cargado");
           playerAtq = player1;
+          const PLAYER_START_GAME = document.getElementById("sendStartGame");
+          PLAYER_START_GAME.innerText = `Turno de ${playerAtq}`;
+          PLAYER_START_GAME.style.color = "green";
         }
       });
 
       socket.on("attack", (user, point, row, column) => {
         console.log(playerAtq);
+        console.log(`USUARIO 1 - ${player1} --- USUARIO 2 ${player2}`);
         if (user == player1) {
           if (point == 1) {
+            const POINTS_PLAYER1 = document.getElementById("scorePlayer1");
             pointsPlayer1 += point;
-            // POINTS_PLAYER1.innerText = `${pointsPlayer1}`;
-            // POINTS_PLAYER2.style.color = "transparent";
+            POINTS_PLAYER1.innerText = `${pointsPlayer1}`;
             good(row, column, user);
           } else {
             fail(row, column, user);
@@ -774,16 +779,25 @@
           playerAtq = player2;
         } else if (user == player2) {
           if (point == 1) {
-            pointsPlayer2 += point;
             good(row, column, user);
           } else {
             fail(row, column, user);
           }
           playerAtq = player1;
         }
+
+        if (pointsPlayer1 == 5) {
+          socket.emit("winner", user);
+          alert(`GANADOR ¡${user}!`);
+          location.reload();
+        }
         const PLAYER_START_GAME = document.getElementById("sendStartGame");
         PLAYER_START_GAME.innerText = `Turno de ${playerAtq}`;
         PLAYER_START_GAME.style.color = "green";
+      });
+      socket.on("winner", (user) => {
+        alert(`GANADOR ¡${user}!`);
+        location.reload();
       });
     </script>
   </body>

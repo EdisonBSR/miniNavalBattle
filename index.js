@@ -70,6 +70,14 @@ io.on("connection", (socket) => {
       }
     }
   });
+  socket.on("winner", (user) => {
+    player1 = "";
+    player2 = "";
+    boardPlayer1 = [];
+    boardPlayer2 = [];
+    playerAttack = "";
+    socket.broadcast.emit("winner", user);
+  });
 });
 
 server.listen(3000, () => {
