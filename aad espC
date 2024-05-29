@@ -1,0 +1,95 @@
+[33mcommit b35a72f1101c51ee35107e41759d7a4fd81b238f[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Wed May 29 11:12:23 2024 -0500
+
+    add espC
+
+[33mcommit 759b3da576f59961eeb04fb14b88ad47877c6626[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Tue May 28 22:00:15 2024 -0500
+
+    fix validation player1 is diferent player2
+
+[33mcommit d824dd7430ebc6737d4485bb1605886f4722b816[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Tue May 28 20:59:00 2024 -0500
+
+    add validation for shooter in function attack
+
+[33mcommit 73bf9e26f678be3cc516c529c4ebde43b661c49b[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Tue May 28 14:12:15 2024 -0500
+
+    recuperar
+
+[33mcommit 47fc1d1c9dbb58bea0941ddd77ef1e357ce12d83[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Tue May 28 12:36:28 2024 -0500
+
+    add load player new connection
+
+[33mcommit fde3cf96076e4d9e7442da2b3599082c67802aa2[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Tue May 28 11:12:29 2024 -0500
+
+    add socket winner
+
+[33mcommit 0cfbf687827712f9499b556979d57c55d90d4a5d[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Tue May 28 09:54:16 2024 -0500
+
+    add style and turn player
+
+[33mcommit 7163587e6a7d30dc409268c2ca76e25216c9be13[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Tue May 28 09:21:45 2024 -0500
+
+    add style board
+
+[33mcommit ec79f48ba4a86c416dae11f80345a687fd466af0[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Tue May 28 07:19:34 2024 -0500
+
+    points player
+
+[33mcommit f7a44ed5e8faf14ce8d79ec58b12f0d1b5d62f32[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Mon May 27 21:25:25 2024 -0500
+
+    fix attack v.2
+
+[33mcommit b5a7fd1f7019f41e26e07d20fc9025498b1ed28c[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Mon May 27 12:33:36 2024 -0500
+
+    fix attack
+
+[33mcommit a68225d73566d261b9ff6068043518ee52559072[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Mon May 27 10:09:36 2024 -0500
+
+    add validation star game
+
+[33mcommit 40e4dc8615db89c78cf7e9434a102936a902d924[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Sun May 26 23:21:24 2024 -0500
+
+    add eventListener boat_position y attack
+
+[33mcommit 7374fb4aaf6eb20d81f96dc90c91f6029904b072[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Fri May 24 15:49:38 2024 -0500
+
+    add attack client
+
+[33mcommit 334806c32f0462d2f17df1987e34ce128f1dde76[m
+Author: EdisonBSR <edisobladimir.solanor@gmail.com>
+Date:   Fri May 24 15:06:56 2024 -0500
+
+    add game board
+
+[33mcommit 52af08422b9dcbed47c317862955383b0980f9ec[m
+Author: EdisonBSR <156144009+EdisonBSR@users.noreply.github.com>
+Date:   Fri May 24 08:11:24 2024 -0500
+
+    Initial commit
