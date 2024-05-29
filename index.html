@@ -109,6 +109,7 @@
           Enviar
         </button>
       </form>
+      <span id="spanPlayer1"></span>
       <p>Barcos enemigos localizado <span id="scorePlayer1"></span></p>
       <table class="table table-bordered border-primary">
         <thead>
@@ -639,6 +640,7 @@
       const socket = io();
       let player1 = "";
       let player2 = "";
+      let espC = "";
       let playerAtq = "";
       let boardPosition = [];
       let countPosition = 0;
@@ -647,29 +649,55 @@
       const ID_BOAT = "bs";
       const FORM1 = document.getElementById("form-1");
       const USER1 = document.getElementById("user-1");
-      good = (row, column, user) => {
+      good = (row, column, user, espS) => {
         if (user == player1) {
-          console.log("pinta fuego");
           const ID = `2${row}${column}`;
-          BUTTON = document.getElementById(`${ID}`);
+          const BUTTON = document.getElementById(`${ID}`);
           BUTTON.style.background = "#FE2626";
           const BOAT = document.createElement("span");
           BOAT.className += "bi bi-fire";
           BUTTON.appendChild(BOAT);
         } else if (user == player2) {
           const ID = `${row}${column}`;
-          BUTTON = document.getElementById(`${ID}`);
+          const BUTTON = document.getElementById(`${ID}`);
           BUTTON.style.background = "#FE2626";
           const BOAT = document.createElement("span");
           BOAT.className += "bi bi-fire";
           BUTTON.appendChild(BOAT);
+          if (true) {
+            const ID = `${row}${column}`;
+            const BUTTON = document.getElementById(`${ID}`);
+            BUTTON.style.background = "green";
+            const BOAT = document.createElement("span");
+            BOAT.className += "bi bi-fire";
+            BUTTON.appendChild(BOAT);
+          }
+        }
+        //si existe un espectador enviar los ataques del jugador 1 al tablero 2
+        if (espC == espS) {
+          if (player1 == user) {
+            const ID = `2${row}${column}`;
+            const BUTTON = document.getElementById(`${ID}`);
+            BUTTON.style.background = "green";
+            const BOAT = document.createElement("span");
+            BOAT.className += "bi bi-fire";
+            BUTTON.appendChild(BOAT);
+          }
+          if (player2 == user) {
+            const ID = `${row}${column}`;
+            const BUTTON = document.getElementById(`${ID}`);
+            BUTTON.style.background = "green";
+            const BOAT = document.createElement("span");
+            BOAT.className += "bi bi-fire";
+            BUTTON.appendChild(BOAT);
+          }
         }
       };
-      fail = (row, column, user) => {
+      fail = (row, column, user, espS) => {
         if (user == player1) {
           console.log("pinta agua");
           const ID = `2${row}${column}`;
-          BUTTON = document.getElementById(`${ID}`);
+          const BUTTON = document.getElementById(`${ID}`);
           BUTTON.style.background = "#03CAE3";
           const BOAT = document.createElement("span");
           BOAT.className += "bi bi-water";
@@ -677,11 +705,29 @@
         } else if (user == player2) {
           console.log("pinta agua");
           const ID = `${row}${column}`;
-          BUTTON = document.getElementById(`${ID}`);
+          const BUTTON = document.getElementById(`${ID}`);
           BUTTON.style.background = "#03CAE3";
           const BOAT = document.createElement("span");
           BOAT.className += "bi bi-water";
           BUTTON.appendChild(BOAT);
+        }
+        if (espC == espS) {
+          if (player1 == user) {
+            const ID = `2${row}${column}`;
+            const BUTTON = document.getElementById(`${ID}`);
+            BUTTON.style.background = "#03CAE3";
+            const BOAT = document.createElement("span");
+            BOAT.className += "bi bi-water";
+            BUTTON.appendChild(BOAT);
+          }
+          if (player2 == user) {
+            const ID = `${row}${column}`;
+            const BUTTON = document.getElementById(`${ID}`);
+            BUTTON.style.background = "#03CAE3";
+            const BOAT = document.createElement("span");
+            BOAT.className += "bi bi-water";
+            BUTTON.appendChild(BOAT);
+          }
         }
       };
 
@@ -704,21 +750,14 @@
         } else {
           alert("Usuario vacio o el nombre ya esta en uso");
         }
-        // console.log(USER1.value);
-        // player1 = USER1.value;
       });
       boatPosition = () => {
-        if (countPosition < 5 && player1 != "") {
+        if (countPosition < 5 && player1 != "" && espC == "") {
           let position = event.target.value;
           let x = position.split("");
-          // console.log(x);
           let [row, column] = x;
-          // console.log(`fila ${row} y columna ${column}`);
           boardPosition[row][column] = ID_BOAT;
-          // console.log(`fila ${row} - columna ${column}`);
-          // console.log(boardPosition[row][column]);
           const ID = event.target.getAttribute("id");
-          // console.log(`id del boton para el barco: ${ID}`);
           const BOAT = document.createElement("span");
           BOAT.className += "bi bi-rocket-takeoff";
           const BUTTON = document.getElementById(`${ID}`);
@@ -734,21 +773,12 @@
         }
         if (countPosition == 5) {
           console.log("ingreso a countPosition==5");
-          // const BUTTO_POSITION =
-          //   document.getElementsByClassName("boat-position");
-          // // BUTTO_POSITION.disabled = true;
-          // console.log(BUTTO_POSITION);
-          // BUTTO_POSITION.forEach((btn) => (btn.disabled = true));
-          // console.log("jugador que puede atacar:");
           socket.emit("start battle", player1, boardPosition);
           countPosition++;
         }
       };
       socket.on("start battle", (start) => {
         const PLAYER_START_GAME = document.getElementById("sendStartGame");
-        // console.log(playerAtq == "");
-        // console.log(playerAtq);
-        // console.log(player2);
         startShotter = start;
         if (playerAtq == "") {
           PLAYER_START_GAME.innerText = `Turno de ${player2}`;
@@ -759,17 +789,16 @@
         }
       });
       attack = () => {
-        if (playerAtq == player1 && startShotter) {
+        if (playerAtq == player1 && startShotter && espC == "") {
           let point = 0;
           let position = event.target.value;
           let x = position.split("");
           let [row, column] = x;
-          // console.log(`funcion attack => fila ${row} y columna ${column}`);
           const ID = event.target.getAttribute("id");
           const BUTTON = document.getElementById(`${ID}`);
           BUTTON.disabled = true;
-          // console.log(`juegador 1 ${player1} - jugador 2 ${player2}`);
           socket.emit("attack", player1, point, row, column);
+        } else if (espC != "") {
         } else {
           alert("No es tu turno para atacar");
         }
@@ -777,6 +806,15 @@
       socket.on("new player", (user1, user2) => {
         if (user1 != "" && user2 != "") {
           alert("usuarios completos");
+          espC = "Espectador";
+          player1 = user1;
+          player2 = user2;
+          const SPAN_PLAYER1 = document.getElementById("spanPlayer1");
+          const SPAN_PLAYER2 = document.getElementById("spanPlayer2");
+          SPAN_PLAYER1.innerText = player1;
+          SPAN_PLAYER2.innerText = player2;
+          //En cada tabla envia el nombre del usuario
+          socket.emit("load player", espC);
           USER1.disabled = true;
           const SEND_NAME = document.getElementById("inputName");
           SEND_NAME.disabled = true;
@@ -784,7 +822,6 @@
           SEND_NAME.style.border = 0;
           USER1.style.background = "transparent";
           USER1.style.color = "transparent";
-
           const BUTTON_ALL = document.querySelectorAll("button");
           BUTTON_ALL.disabled = true;
         } else if (user1 != "") {
@@ -803,16 +840,16 @@
         }
       });
 
-      socket.on("attack", (user, point, row, column) => {
+      socket.on("attack", (user, point, row, column, espS) => {
         if (user == player1) {
           console.log(`Ingreso ${player1}`);
           if (point == 1) {
             const POINTS_PLAYER1 = document.getElementById("scorePlayer1");
             score += point;
             POINTS_PLAYER1.innerText = `${score}`;
-            good(row, column, user);
+            good(row, column, user, espS);
           } else {
-            fail(row, column, user);
+            fail(row, column, user, espS);
           }
           playerAtq = player2;
         } else if (user == player2) {

@@ -10,6 +10,7 @@ const io = new Server(server);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 let player1 = "";
 let player2 = "";
+let espS = "";
 let boardPlayer1 = [];
 let boardPlayer2 = [];
 let playerAttack = "";
@@ -22,7 +23,9 @@ io.on("connection", (socket) => {
   socket.emit("new player", player1, player2);
   socket.on("load player", (user) => {
     console.log(user);
-    if (player1 == "") {
+    if (user == "Espectador") {
+      espS = user;
+    } else if (player1 == "") {
       player1 = user;
       playerAttack = player1;
       io.emit("load player", player1);
@@ -52,11 +55,11 @@ io.on("connection", (socket) => {
         if (boardPlayer2[row][column] == ID_BOAT) {
           point = 1;
           playerAttack = player2;
-          io.emit("attack", player1, point, row, column);
+          io.emit("attack", player1, point, row, column, espS);
         } else {
           point = 0;
           playerAttack = player2;
-          io.emit("attack", player1, point, row, column);
+          io.emit("attack", player1, point, row, column, espS);
         }
       } else if (player2 == user) {
         if (boardPlayer1[row][column] == ID_BOAT) {
