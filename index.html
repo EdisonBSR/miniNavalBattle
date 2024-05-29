@@ -664,34 +664,7 @@
           const BOAT = document.createElement("span");
           BOAT.className += "bi bi-fire";
           BUTTON.appendChild(BOAT);
-          // if (true) {
-          //   const ID = `${row}${column}`;
-          //   const BUTTON = document.getElementById(`${ID}`);
-          //   BUTTON.style.background = "green";
-          //   const BOAT = document.createElement("span");
-          //   BOAT.className += "bi bi-fire";
-          //   BUTTON.appendChild(BOAT);
-          // }
         }
-        //si existe un espectador enviar los ataques del jugador 1 al tablero 2
-        // if (espC == espS) {
-        //   if (player1 == user) {
-        //     const ID = `2${row}${column}`;
-        //     const BUTTON = document.getElementById(`${ID}`);
-        //     BUTTON.style.background = "green";
-        //     const BOAT = document.createElement("span");
-        //     BOAT.className += "bi bi-fire";
-        //     BUTTON.appendChild(BOAT);
-        //   }
-        //   if (player2 == user) {
-        //     const ID = `${row}${column}`;
-        //     const BUTTON = document.getElementById(`${ID}`);
-        //     BUTTON.style.background = "green";
-        //     const BOAT = document.createElement("span");
-        //     BOAT.className += "bi bi-fire";
-        //     BUTTON.appendChild(BOAT);
-        //   }
-        // }
       };
       fail = (row, column, user, espS) => {
         if (user == player1) {
@@ -711,24 +684,6 @@
           BOAT.className += "bi bi-water";
           BUTTON.appendChild(BOAT);
         }
-        // if (espC == espS) {
-        //   if (player1 == user) {
-        //     const ID = `2${row}${column}`;
-        //     const BUTTON = document.getElementById(`${ID}`);
-        //     BUTTON.style.background = "#03CAE3";
-        //     const BOAT = document.createElement("span");
-        //     BOAT.className += "bi bi-water";
-        //     BUTTON.appendChild(BOAT);
-        //   }
-        //   // if (player2 == user) {
-        //   //   const ID = `${row}${column}`;
-        //   //   const BUTTON = document.getElementById(`${ID}`);
-        //   //   BUTTON.style.background = "#03CAE3";
-        //   //   const BOAT = document.createElement("span");
-        //   //   BOAT.className += "bi bi-water";
-        //   //   BUTTON.appendChild(BOAT);
-        //   // }
-        // }
       };
 
       for (let row = 0; row < 5; row++) {
@@ -816,9 +771,14 @@
           player2 = user2;
           const SPAN_PLAYER1 = document.getElementById("spanPlayer1");
           const SPAN_PLAYER2 = document.getElementById("spanPlayer2");
+          const ENEMY_BOAT = document.getElementById("enemy-boat");
+          const SCORE = document.getElementById("scorePlayer1");
+
           SPAN_PLAYER1.innerText = player1;
           SPAN_PLAYER2.innerText = player2;
-          //En cada tabla envia el nombre del usuario
+          SPAN_PLAYER2.style.color = "black";
+          ENEMY_BOAT.innerText = "Gana quie destruya los 5 barcos del rival";
+          SCORE.style.color = "transparent";
           socket.emit("load player", espC);
           USER1.disabled = true;
           const SEND_NAME = document.getElementById("inputName");
