@@ -3,7 +3,6 @@ import { createServer } from "node:http";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { Server } from "socket.io";
-import { log } from "node:console";
 
 const app = express();
 const server = createServer(app);
@@ -22,12 +21,12 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
   socket.emit("new player", player1, player2);
   socket.on("load player", (user) => {
-    console, log(user);
+    console.log(user);
     if (player1 == "") {
       player1 = user;
       playerAttack = player1;
       io.emit("load player", player1);
-    } else if (player2 == "") {
+    } else if (player2 == "" && user != player1) {
       player2 = user;
       io.emit("load player", player2);
     }
@@ -41,6 +40,10 @@ io.on("connection", (socket) => {
       console.log("tablero 2");
       boardPlayer2 = boardPlayer;
       console.log(boardPlayer2);
+    }
+    if (boardPlayer1.length > 0 && boardPlayer2.length > 0) {
+      let start = true;
+      io.emit("start battle", start);
     }
   });
   socket.on("attack", (user, point, row, column) => {

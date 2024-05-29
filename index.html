@@ -643,6 +643,7 @@
       let boardPosition = [];
       let countPosition = 0;
       let pointsPlayer1 = 0;
+      let startShotter = false;
       const ID_BOAT = "bs";
       const FORM1 = document.getElementById("form-1");
       const USER1 = document.getElementById("user-1");
@@ -723,19 +724,39 @@
           BUTTON.appendChild(BOAT);
           countPosition++;
           console.log(countPosition);
-        } else {
+        } else if (countPosition >= 6) {
+          alert("No puede agregar mas barcos ");
+        } else if (player1 == "") {
           alert("No ha ingresado su nombre de jugador");
         }
         if (countPosition == 5) {
-          const BUTTO_POSITION =
-            document.getElementsByClassName("boat-position");
-          BUTTO_POSITION.disabled = true;
+          console.log("ingreso a countPosition==5");
+          // const BUTTO_POSITION =
+          //   document.getElementsByClassName("boat-position");
+          // // BUTTO_POSITION.disabled = true;
+          // console.log(BUTTO_POSITION);
+          // BUTTO_POSITION.forEach((btn) => (btn.disabled = true));
+          // console.log("jugador que puede atacar:");
           socket.emit("start battle", player1, boardPosition);
+          countPosition++;
         }
       };
-
+      socket.on("start battle", (start) => {
+        const PLAYER_START_GAME = document.getElementById("sendStartGame");
+        // console.log(playerAtq == "");
+        // console.log(playerAtq);
+        // console.log(player2);
+        startShotter = start;
+        if (playerAtq == "") {
+          PLAYER_START_GAME.innerText = `Turno de ${player2}`;
+          PLAYER_START_GAME.style.color = "green";
+        } else {
+          PLAYER_START_GAME.innerText = `Turno de ${playerAtq}`;
+          PLAYER_START_GAME.style.color = "green";
+        }
+      });
       attack = () => {
-        if (playerAtq == player1) {
+        if (playerAtq == player1 && startShotter) {
           let point = 0;
           let position = event.target.value;
           let x = position.split("");
@@ -748,7 +769,6 @@
           socket.emit("attack", player1, point, row, column);
         } else {
           alert("No es tu turno para atacar");
-          BUTTON.disabled = true;
         }
       };
       socket.on("new player", (user1, user2) => {
@@ -761,7 +781,9 @@
           SEND_NAME.style.border = 0;
           USER1.style.background = "transparent";
           USER1.style.color = "transparent";
-          USE1.removeAttribute("placeholder");
+
+          const BUTTON_ALL = document.querySelectorAll("button");
+          BUTTON_ALL.disabled = true;
         } else if (user1 != "") {
           player2 = user1;
           const SPAN_PLAYER2 = document.getElementById("spanPlayer2");
@@ -775,9 +797,6 @@
           SPAN_PLAYER2.innerHTML = user;
           console.log("usuario cargado");
           playerAtq = player1;
-          const PLAYER_START_GAME = document.getElementById("sendStartGame");
-          PLAYER_START_GAME.innerText = `Turno de ${playerAtq}`;
-          PLAYER_START_GAME.style.color = "green";
         }
       });
 
