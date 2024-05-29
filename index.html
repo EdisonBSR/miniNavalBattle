@@ -642,7 +642,7 @@
       let playerAtq = "";
       let boardPosition = [];
       let countPosition = 0;
-      let pointsPlayer1 = 0;
+      let score = 0;
       let startShotter = false;
       const ID_BOAT = "bs";
       const FORM1 = document.getElementById("form-1");
@@ -694,15 +694,18 @@
       FORM1.addEventListener("submit", (e) => {
         e.preventDefault();
         const SEND_NAME = document.getElementById("inputName");
+        console.log(USER1.value == player2);
         if (USER1.value != "" && USER1.value != player2) {
           player1 = USER1.value;
           USER1.disabled = true;
           SEND_NAME.disabled = true;
           socket.emit("load player", player1);
           console.log(`jugador enviado ${player1}`);
+        } else {
+          alert("Usuario vacio o el nombre ya esta en uso");
         }
-        console.log(USER1.value);
-        player1 = USER1.value;
+        // console.log(USER1.value);
+        // player1 = USER1.value;
       });
       boatPosition = () => {
         if (countPosition < 5 && player1 != "") {
@@ -805,8 +808,8 @@
           console.log(`Ingreso ${player1}`);
           if (point == 1) {
             const POINTS_PLAYER1 = document.getElementById("scorePlayer1");
-            pointsPlayer1 += point;
-            POINTS_PLAYER1.innerText = `${pointsPlayer1}`;
+            score += point;
+            POINTS_PLAYER1.innerText = `${score}`;
             good(row, column, user);
           } else {
             fail(row, column, user);
@@ -823,10 +826,10 @@
           playerAtq = player1;
         }
 
-        if (pointsPlayer1 == 5) {
+        if (score == 5) {
           socket.emit("winner", user);
           alert(`GANADOR ¡${user}!`);
-          location.reload();
+          // location.reload();
         }
         const PLAYER_START_GAME = document.getElementById("sendStartGame");
         PLAYER_START_GAME.innerText = `Turno de ${playerAtq}`;
@@ -834,7 +837,7 @@
       });
       socket.on("winner", (user) => {
         alert(`GANADOR ¡${user}!`);
-        location.reload();
+        // location.reload();
       });
     </script>
   </body>
