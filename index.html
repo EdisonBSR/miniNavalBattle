@@ -780,11 +780,16 @@
       socket.on("start battle", (start) => {
         const PLAYER_START_GAME = document.getElementById("sendStartGame");
         startShotter = start;
+
         if (playerAtq == "") {
           PLAYER_START_GAME.innerText = `Turno de ${player2}`;
           PLAYER_START_GAME.style.color = "green";
         } else {
           PLAYER_START_GAME.innerText = `Turno de ${playerAtq}`;
+          PLAYER_START_GAME.style.color = "green";
+        }
+        if (espC != "") {
+          PLAYER_START_GAME.innerText = `Turno de ${player1}`;
           PLAYER_START_GAME.style.color = "green";
         }
       });
