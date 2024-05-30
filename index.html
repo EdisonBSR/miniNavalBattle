@@ -110,7 +110,9 @@
         </button>
       </form>
       <span id="spanPlayer1"></span>
-      <p>Barcos enemigos localizado <span id="scorePlayer1"></span></p>
+      <p id="enemy-boat">
+        Barcos enemigos localizado <span id="scorePlayer1"></span>
+      </p>
       <table class="table table-bordered border-primary">
         <thead>
           <tr>
@@ -771,24 +773,20 @@
           player2 = user2;
           const SPAN_PLAYER1 = document.getElementById("spanPlayer1");
           const SPAN_PLAYER2 = document.getElementById("spanPlayer2");
-          const ENEMY_BOAT = document.getElementById("enemy-boat");
-          const SCORE = document.getElementById("scorePlayer1");
-
+          const INPUT_PLAYER = document.getElementById("user-1");
+          const NAME = document.getElementById("inputName");
+          const BOAT_ENEMY = document.getElementById("enemy-boat");
+          INPUT_PLAYER.placeholder = "";
+          INPUT_PLAYER.disabled = true;
+          INPUT_PLAYER.style.background = "transparent";
           SPAN_PLAYER1.innerText = player1;
           SPAN_PLAYER2.innerText = player2;
           SPAN_PLAYER2.style.color = "black";
-          ENEMY_BOAT.innerText = "Gana quie destruya los 5 barcos del rival";
-          SCORE.style.color = "transparent";
+          NAME.disabled = true;
+          NAME.style.background = "transparent";
+          NAME.style.border = 0;
+          BOAT_ENEMY.style.color = "transparent";
           socket.emit("load player", espC);
-          USER1.disabled = true;
-          const SEND_NAME = document.getElementById("inputName");
-          SEND_NAME.disabled = true;
-          SEND_NAME.style.background = "transparent";
-          SEND_NAME.style.border = 0;
-          USER1.style.background = "transparent";
-          USER1.style.color = "transparent";
-          const BUTTON_ALL = document.querySelectorAll("button");
-          BUTTON_ALL.disabled = true;
         } else if (user1 != "") {
           player2 = user1;
           const SPAN_PLAYER2 = document.getElementById("spanPlayer2");
